@@ -1,0 +1,12 @@
+CONTENT_ASSIST_BACKGROUND_COLOR=255,255,255
+ColorsAndFontsPreferencePage.expandedCategories=Torg.eclipse.ui.workbenchMisc\tTorg.eclipse.cdt.ui.presentation\tTorg.eclipse.debug.ui.presentation\tTorg.eclipse.egit.ui.GitTheme\tTorg.eclipse.jdt.ui.presentation\tTorg.eclipse.wst.sse.ui\tTorg.eclipse.compare.contentmergeviewer.TextMergeViewer\tTorg.eclipse.ui.presentation.default
+ColorsAndFontsPreferencePage.selectedElement=Corg.eclipse.ui.workbench.ACTIVE_NOFOCUS_TAB_TEXT_COLOR
+ENABLED_DECORATORS=com.android.ide.eclipse.adt.project.FolderDecorator\:true,org.eclipse.cdt.ui.indexedFiles\:false,org.eclipse.cdt.managedbuilder.ui.excludedFile\:true,org.eclipse.egit.ui.internal.decorators.GitLightweightDecorator\:true,org.eclipse.jdt.ui.override.decorator\:true,org.eclipse.jdt.ui.interface.decorator\:false,org.eclipse.jdt.ui.buildpath.decorator\:true,org.eclipse.ui.LinkedResourceDecorator\:true,org.eclipse.ui.VirtualResourceDecorator\:true,org.eclipse.ui.ContentTypeDecorator\:true,org.eclipse.ui.ResourceFilterDecorator\:false,
+OUTGOING_COLOR=255,255,255
+eclipse.preferences.version=1
+org.eclipse.jdt.ui.DeclarationView.backgroundColor=255,255,255
+org.eclipse.jdt.ui.JavadocView.backgroundColor=255,255,255
+org.eclipse.ui.workbench.ACTIVE_NOFOCUS_TAB_BG_END=255,255,255
+org.eclipse.ui.workbench.ACTIVE_TAB_TEXT_COLOR=255,255,255
+org.eclipse.ui.workbench.INACTIVE_TAB_BG_END=255,255,255
+org.eclipse.ui.workbench.INACTIVE_TAB_BG_START=255,255,255

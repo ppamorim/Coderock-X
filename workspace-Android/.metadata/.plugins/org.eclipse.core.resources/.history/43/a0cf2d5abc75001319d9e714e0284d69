@@ -1,0 +1,111 @@
+package com.example.teste1;
+
+import android.os.Bundle;
+import android.os.Handler;
+import android.app.Activity;
+import android.content.Intent;
+import android.view.Menu;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Button;
+
+public class MainActivity extends Activity {
+	
+	private final int DuracaoSplash = 5000;
+	
+	
+	EditText Valor1, Valor2, Resultado;
+	Button Soma, Sub, Multi, Div;
+	
+	double v1, v2, result;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.splashscreen);
+		
+		new Handler().postDelayed(new Runnable() {
+			
+			@Override
+			public void run() {
+				Intent minhaAcao = new Intent(MainActivity.this,Tela2.class);
+				
+				MainActivity.this.startActivity(minhaAcao);
+				
+				MainActivity.this.finish();
+				
+			}
+		}, DuracaoSplash);
+		
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.splashscreen);
+		
+		Valor1 = (EditText) findViewById(R.id.Valor1);
+		Valor2 = (EditText) findViewById(R.id.Valor2);
+		Resultado = (EditText) findViewById(R.id.Resultado);
+		Soma = (Button) findViewById(R.id.Soma);
+		Sub = (Button) findViewById(R.id.Sub);
+		Multi = (Button) findViewById(R.id.Multi);
+		Div = (Button) findViewById(R.id.Div);
+		
+		Soma.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				v1 = Double.parseDouble(Valor1.getText().toString());
+				v2 = Double.parseDouble(Valor2.getText().toString());
+				result = v1 + v2;
+				
+				Resultado.setText(String.valueOf(result));
+			}
+		});
+		
+		
+		Sub.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				v1 = Double.parseDouble(Valor1.getText().toString());
+				v2 = Double.parseDouble(Valor2.getText().toString());
+				result = v1 - v2;
+				
+				Resultado.setText(String.valueOf(result));
+			}
+		});
+
+
+		Multi.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				v1 = Double.parseDouble(Valor1.getText().toString());
+				v2 = Double.parseDouble(Valor2.getText().toString());
+				result = v1 * v2;
+				
+				Resultado.setText(String.valueOf(result));
+			}
+		});
+		
+		Div.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				v1 = Double.parseDouble(Valor1.getText().toString());
+				v2 = Double.parseDouble(Valor2.getText().toString());
+				result = v1 / v2;
+				
+				Resultado.setText(String.valueOf(result));
+			}
+		});
+
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+}

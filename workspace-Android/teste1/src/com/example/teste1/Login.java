@@ -1,0 +1,150 @@
+package com.example.teste1;
+
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.parse.LogInCallback;
+import com.parse.Parse;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseUser;
+
+public class Login extends Activity {
+	
+	String Email_Base = "1", Password_Base = "2";
+	String Username = "", Password = "";
+	
+	EditText E_Username, E_Password;
+	Button Entrar, Cadastrar;
+	
+	
+ @Override
+ 	protected void onCreate(Bundle savedInstanceState) {
+	 
+	 Parse.initialize(this, "QIZZHa8k0SF203wzLBExXs1bkUvHoHXDY48rkpnB", "aAUhkuzwVFDTgmdJKODhGkjP87pbp8orLI7MIKdR"); 
+	// TODO Auto-generated method stub
+	super.onCreate(savedInstanceState);
+	setContentView(R.layout.activity_login);
+	
+	//Código do parse
+	ParseObject Object_Parse_Usuario = new ParseObject("Object_Parse_Usuario");
+	Object_Parse_Usuario.put("User", "bar");
+	Object_Parse_Usuario.saveInBackground();
+
+	//declaracao das variaveis dos objetos
+	E_Username = (EditText) findViewById(R.id.EditUsername);
+	E_Password = (EditText) findViewById(R.id.Senha);
+	Entrar = (Button) findViewById(R.id.Entrar);
+	Cadastrar = (Button) findViewById(R.id.Register);
+	
+	Cadastrar.setOnClickListener(new View.OnClickListener() {
+		
+		@Override
+		public void onClick(View view) {
+			
+			switch (view.getId())
+			{
+			case R.id.Register: ButtonRegisterClick();
+			break;
+			}		
+		}
+	});
+	
+	Entrar.setOnClickListener(new View.OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+
+			Username = E_Username.getText().toString();
+			Password = E_Password.getText().toString();
+			
+			if((Username.equals(""))&&(Password.equals(""))) {
+				ShowOneButtonDialog("Error","The field username and password are empty.");
+			} else if(Username.equals("")) {
+				ShowOneButtonDialog("Error","The field username is empty.");
+			} else if (Password.equals("")) {
+				ShowOneButtonDialog("Error","The field password is empty.");
+			} else {
+			ButtonSignUp(Username,Password);
+			}
+		}
+	});
+ }
+ 
+ 
+ 
+ 
+ 
+ 	
+ 
+ 	private void ButtonSignUp(String BUsername, String BPassword) {
+ 		
+ 		ParseUser Object_Parse_Usuario = new ParseUser();
+ 		Object_Parse_Usuario.logInInBackground(BUsername, BPassword, new LogInCallback() {
+			
+			@Override
+			public void done(ParseUser user, ParseException e) {
+				if(user !=null) {
+					ShowOneButtonDialog(":)","Welcome back!");
+				} else {
+					ShowOneButtonDialog(":(","Náo foi possível entrar.");
+				}
+				
+			}
+		});
+ 	}
+ 
+ 	private void ButtonRegisterClick() {
+		startActivity(new Intent("com.exemple.teste1.Register"));
+	}
+ 
+ 	private void ShowOneButtonDialog(String Titulo, String Mensagem)
+ 	{
+ 		AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+ 		dialogBuilder.setTitle(Titulo);
+ 		dialogBuilder.setMessage(Mensagem);
+ 		dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				Toast.makeText(getApplicationContext(), "Você clicou em OK", Toast.LENGTH_SHORT).show();
+				
+			}
+		});
+ 		AlertDialog alertDialog = dialogBuilder.create();
+ 		alertDialog.show();
+ 	}
+ 	
+ 	//Função que esconde o teclado quando se clica na área fora do teclado.
+ 	@Override
+ 	public boolean dispatchTouchEvent(MotionEvent event) {
+ 	View view = getCurrentFocus();
+ 	boolean ret = super.dispatchTouchEvent(event);
+
+ 	if (view instanceof EditText) {
+ 	    View w = getCurrentFocus();
+ 	    int scrcoords[] = new int[2];
+ 	    w.getLocationOnScreen(scrcoords);
+ 	    float x = event.getRawX() + w.getLeft() - scrcoords[0];
+ 	    float y = event.getRawY() + w.getTop() - scrcoords[1];
+
+ 	    if (event.getAction() == MotionEvent.ACTION_UP 
+ 	&& (x < w.getLeft() || x >= w.getRight() 
+ 	|| y < w.getTop() || y > w.getBottom()) ) { 
+ 	        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+ 	        imm.hideSoftInputFromWindow(getWindow().getCurrentFocus().getWindowToken(), 0);
+ 	    }
+ 	}
+ 	return ret;
+ 	}
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Feel</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="Email">Email:</string>
+    <string name="Password">Password:</string>
+    <string name="Resultado">Resultado:</string>
+    <string name="BotaoSomar">Somar</string>
+    <string name="BotaoSub">Subtrair</string>
+    <string name="BotaoMulti">Multiplicar</string>
+    <string name="BotaoDividir">Dividir</string>
+    <string name="ok">OK</string>
+    <string name="username">Username:</string>
+    <string name="register">Register</string>
+    <string name="cancel">Cancel</string>
+
+</resources>

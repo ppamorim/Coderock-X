@@ -1,0 +1,101 @@
+package com.example.teste1;
+
+import android.os.Bundle;
+import android.os.Handler;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import com.parse.Parse;
+import com.parse.ParseAnalytics;
+import com.parse.ParseObject;
+
+
+public class Register extends Activity {
+	
+	Button Registrar, Cancelar;
+	EditText E_Username, E_Email, E_Password;
+	
+	String Username, Email, Password;
+	
+	protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.register);
+                
+        Registrar = (Button) findViewById(R.id.Register_Register);
+        Cancelar = (Button) findViewById(R.id.Register_Cancelar);
+        E_Username = (EditText) findViewById(R.id.Register_Username);
+        E_Email = (EditText) findViewById(R.id.Register_Email);
+        E_Password = (EditText) findViewById(R.id.Register_Password);
+        
+        
+        Registrar.setOnClickListener(new View.OnClickListener() {
+        				
+			@Override
+			public void onClick(View view) {
+				switch (view.getId())
+				{
+				case R.id.Register_Register : ButtonCancelClick();
+				break;
+				}	
+			}
+		});
+        
+        
+        Cancelar.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View view) {
+				switch (view.getId())
+				{
+				case R.id.Register_Cancelar : ButtonRegister();
+				break;
+				}	
+			}
+		});
+	}
+    
+    private void ButtonRegister() {
+    	
+    	Username = E_Username.getText().toString();
+    	Email = E_Email.getText().toString();
+    	Password = E_Password.getText().toString();
+    	
+    	ParseObject Object_Parse_Usuario = new ParseObject("Object_Parse_Usuario");
+    	Object_Parse_Usuario.put("User", Username);
+    	Object_Parse_Usuario.put("Email", Email);
+    	Object_Parse_Usuario.put("Password", Password);
+    	Object_Parse_Usuario.saveInBackground();
+    }
+    
+    private void ButtonCancelClick() {
+    	startActivity(new Intent("com.exemple.teste1.Login"));
+    }
+    
+  //Função que esconde o teclado quando se clica na área fora do teclado.
+   	@Override
+   	public boolean dispatchTouchEvent(MotionEvent event) {
+   	View view = getCurrentFocus();
+   	boolean ret = super.dispatchTouchEvent(event);
+
+   	if (view instanceof EditText) {
+   	    View w = getCurrentFocus();
+   	    int scrcoords[] = new int[2];
+   	    w.getLocationOnScreen(scrcoords);
+   	    float x = event.getRawX() + w.getLeft() - scrcoords[0];
+   	    float y = event.getRawY() + w.getTop() - scrcoords[1];
+
+   	    if (event.getAction() == MotionEvent.ACTION_UP 
+   	&& (x < w.getLeft() || x >= w.getRight() 
+   	|| y < w.getTop() || y > w.getBottom()) ) { 
+   	        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+   	        imm.hideSoftInputFromWindow(getWindow().getCurrentFocus().getWindowToken(), 0);
+   	    }
+   	}
+   	return ret;
+   	}
+}

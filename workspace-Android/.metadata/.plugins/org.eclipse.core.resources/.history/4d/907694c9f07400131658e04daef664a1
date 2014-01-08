@@ -1,0 +1,37 @@
+package com.example.teste1;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
+import android.widget.EditText;
+import android.widget.Button;
+
+public class MainActivity extends Activity {
+	
+	EditText Valor1, Valor2, Resultado;
+	Button Soma, Sub, Multi, Div;
+	
+	double v1, v2, result;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		Valor1 = (EditText) findViewById(R.id.Valor1);
+		Valor2 = (EditText) findViewById(R.id.Valor2);
+		Resultado = (EditText) findViewById(R.id.Resultado);
+		Soma = (Button) findViewById(R.id.Soma);
+		Sub = (Button) findViewById(R.id.Sub);
+		Multi = (Button) findViewById(R.id.Multi);
+		Div = (Button) findViewById(R.id.Div);
+		
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+}
